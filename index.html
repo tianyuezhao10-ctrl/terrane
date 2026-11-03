@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#080808" />
+    <meta name="description" content="An interactive spatial archive of human exploration." />
+    <title>Atlas of Departure</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&amp;display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fragment+Mono&amp;display=swap" />
+<style>
+  html, body { margin: 0; background: #080808; }
+  html:not(.app-ready) .entry-flow { position: fixed; inset: 0; z-index: 9999; background: #080808; color: #ddd; }
+  html:not(.app-ready) .entry-cover-copy { position: absolute; bottom: 40px; left: 40px; font-family: monospace; }
+  html:not(.app-ready) .entry-kicker img { width: 300px; max-width: 70vw; }
+  html:not(.app-ready) .entry-continue { color: #aaa; background: transparent; border: 0; }
+  #app { visibility: hidden; }
+  html.archive-entered #app { visibility: visible; }
+</style>
+  <script type="module" crossorigin src="./assets/index-DfgpksU4.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-B-Atg2a6.css">
+</head>
+  <body>
+    <div class="entry-flow" data-entry-state="cover" aria-live="polite">
+      <section class="entry-cover" aria-label="Enter Atlas of Departure" aria-hidden="false">
+        <div class="entry-cover-orbit" aria-hidden="true"></div>
+        <div class="entry-cover-copy">
+          <span class="entry-kicker entry-kicker--wordmark"><img src="./terrane-wordmark.png" alt="TERRANE" /></span>
+          <p class="entry-status" role="status">Loading models and textures…</p><button class="entry-continue" type="button" disabled>ENTER ARCHIVE<span aria-hidden="true">↗</span></button>
+        </div>
+      </section>
+    </div>
+    <main id="app">
+      <canvas id="space" aria-label="Interactive spatial map of Earth, Moon, Mars, and historic exploration routes"></canvas>
+
+      <header class="masthead">
+        <a class="wordmark terrane-wordmark" href="#" aria-label="TERRANE, return to Earth view">
+          <img src="./terrane-wordmark.png" alt="TERRANE" />
+        </a>
+      </header>
+
+      <button class="list-toggle" type="button" aria-expanded="true" aria-controls="archive-list" aria-label="Close archive list"><span aria-hidden="true">−</span></button>
+      <button class="installation-button" type="button">INSTALLATION</button>
+      <aside class="timeline" id="archive-list" aria-label="Spatial archive events">
+        <div class="timeline-heading"><span>TIMELINE</span></div>
+        <div id="event-list"></div>
+      </aside>
+
+      <section id="markers" aria-label="Historic events"></section>
+
+      <aside class="field-notes" aria-label="Selected event summary">
+        <div class="field-heading"><span>EVENT SUMMARY</span></div>
+        <div class="field-context">SELECTED EVENT</div><div class="field-value" id="field-event">SELECT AN EVENT</div>
+        <div class="field-grid"><div><span class="field-label">LOCATION</span><strong id="field-position">—</strong></div><div><span class="field-label">ORIGIN</span><strong id="field-origin">—</strong></div><div><span class="field-label">DESTINATION</span><strong id="field-destination">—</strong></div></div>
+        <div class="field-context">TRACE</div>
+        <div class="field-trace" id="field-trace" data-kind="idle" aria-label="Earth to Moon to Mars trace">
+          <span class="trace-node trace-earth"><i></i><b>EARTH</b></span>
+          <span class="trace-node trace-moon"><i></i><b>MOON</b></span>
+          <span class="trace-node trace-mars"><i></i><b>MARS</b></span>
+          <i class="trace-path trace-path-earth"></i>
+          <i class="trace-path trace-path-moon"></i>
+          <i class="trace-path trace-path-mars"></i>
+        </div>
+      </aside>
+
+      <aside class="event-panel" aria-hidden="true" aria-labelledby="panel-title">
+        <button class="close-panel" type="button" aria-label="Close event panel">
+          <span></span><span></span>
+        </button>
+        <div class="panel-index">ARCHIVE / <span id="panel-number">01</span></div>
+        <div class="legacy-panel-content">
+          <h1 id="panel-title">COLUMBUS</h1><p id="panel-date" class="panel-date">1492</p>
+          <p class="panel-note">Archive materials are not included for this event.</p>
+        </div>
+        <section class="columbus-archive" aria-labelledby="columbus-archive-title" hidden>
+          <header class="columbus-archive-header"><h1 id="columbus-archive-title"><img src="./columbus-wordmark.png" alt="COLUMBUS" /></h1><p class="columbus-deck">A newly encountered world moves from description, to territorial claim, to institutionalized rights.</p></header>
+          <div class="columbus-timeline">
+            <article class="columbus-entry" data-columbus-entry><div class="columbus-entry-index"><strong>1493</strong></div><div class="columbus-entry-body"><p class="columbus-stage">DESCRIBED / VALUE</p><h2>LETTER OF COLUMBUS</h2><p class="columbus-source">Letter to Luis de Santángel</p><div class="columbus-document columbus-document--letter"><button type="button" class="columbus-media-button" aria-label="Enlarge the 1493 Columbus letter"><object data-src="./columbus-archive/columbus-letter-1493.pdf" type="application/pdf" aria-label="1493 Columbus letter archive"></object></button><span class="columbus-media-caption">LETTER TO LUIS DE SANTÁNGEL / 1493</span></div><p class="columbus-description">In his letter, Columbus described the islands he had encountered to readers in Europe, recording their lands, inhabitants, and resources. Places previously unknown to Europeans entered written accounts that could be circulated and assessed.</p></div></article>
+            <article class="columbus-entry" data-columbus-entry><div class="columbus-entry-index"><strong>1494</strong></div><div class="columbus-entry-body"><p class="columbus-stage">DIVIDED / CLAIM</p><h2>TREATY OF TORDESILLAS</h2><div class="columbus-document columbus-document--treaty"><span class="columbus-boundary-line" aria-hidden="true"></span><button type="button" class="columbus-media-button" aria-label="Enlarge the Tordesillas treaty pages"><img src="./columbus-archive/tordesillas-main.jpg" alt="Tordesillas treaty document with seal and manuscript text"></button><button type="button" class="columbus-media-button columbus-media-button--offset" aria-label="Enlarge the second Tordesillas treaty page"><img src="./columbus-archive/tordesillas-left.jpg" alt="Left page of the Tordesillas treaty manuscript"></button><span class="columbus-media-caption">TREATY OF TORDESILLAS / 1494</span></div><p class="columbus-description">Spain and Portugal established a line of demarcation to divide their claims to overseas territories not yet fully charted by Europeans. Maps became more than instruments for describing the world; they also served to assert territorial claims.</p></div></article>
+            <article class="columbus-entry" data-columbus-entry><div class="columbus-entry-index"><strong>1502</strong></div><div class="columbus-entry-body"><p class="columbus-stage">INSTITUTIONALIZED / RIGHT</p><h2>BOOK OF PRIVILEGES</h2><p class="columbus-source">Libro de los Privilegios</p><div class="columbus-document columbus-document--video"><div class="video-preview" data-video-preview><button class="video-poster" type="button" aria-label="Play The Book of Privileges archive film"><img src="./columbus-archive/privileges-1502-poster.webp" alt="" loading="lazy" width="960" height="540" /><span class="video-play-icon" aria-hidden="true">▶</span></button><video hidden controls preload="none" playsinline data-src="./columbus-archive/privileges-1502.mp4" poster="./columbus-archive/privileges-1502-poster.webp" aria-label="The Book of Privileges archive film"></video><span class="video-status" role="status" hidden></span></div><span class="columbus-media-caption">BOOK OF PRIVILEGES / RELATED VIDEO</span></div><p class="columbus-description">The Book of Privileges brought together royal grants, privileges, and legal instruments relating to Columbus's voyages. What had been presented as a "discovery" was recorded, affirmed, and translated into enduring claims of authority and entitlement.</p><p class="columbus-question">Who held the right to travel, profit, and govern there?</p></div></article>
+          </div>
+        </section>
+        <section class="westward-archive" aria-labelledby="westward-archive-title" hidden>
+          <header class="westward-archive-header"><h1 id="westward-archive-title"><img src="./westward-wordmark.png" alt="WESTWARD EXPANSION" /></h1><p class="westward-deck">Westward expansion was not only the movement of people. It was also the reorganization of land, ownership, infrastructure, ecology, and power.</p></header>
+          <div class="westward-gridline" aria-hidden="true"></div>
+          <div class="westward-timeline">
+            <article class="westward-entry" data-westward-entry><div class="westward-entry-index"><strong>1830</strong></div><div class="westward-entry-body"><p class="westward-stage">REMOVED</p><h2>INDIAN REMOVAL ACT</h2><div class="westward-document westward-document--pdf"><button type="button" class="westward-media-button" aria-label="Enlarge the 1832 Indian removal message"><object data-src="./westward-archive/removal-message-1832.pdf" type="application/pdf" aria-label="1832 presidential message on Indian removal"></object></button><span class="westward-media-caption">PRESIDENTIAL MESSAGE ON INDIAN REMOVAL / 1832</span></div><p class="westward-description">The Indian Removal Act authorized the United States government to promote the relocation of Indigenous peoples east of the Mississippi to lands farther west. For an expanding population, the West promised new land; for peoples already living within those land relations, migration could mean forced removal.</p></div></article>
+            <article class="westward-entry" data-westward-entry><div class="westward-entry-index"><strong>1862</strong></div><div class="westward-entry-body"><p class="westward-stage">DISTRIBUTED</p><h2>HOMESTEAD ACT</h2><div class="westward-document westward-document--homestead"><button type="button" class="westward-media-button" aria-label="Enlarge the Homestead Act document"><img src="./westward-archive/homestead-act-1862.jpg" alt="Homestead Act document from 1862"></button><div class="westward-proof-strip"><button type="button" class="westward-media-button" aria-label="Enlarge Daniel Freeman's application"><img src="./westward-archive/freeman-application-1863.jpg" alt="Daniel Freeman homestead application"></button><button type="button" class="westward-media-button" aria-label="Enlarge Daniel Freeman's proof"><img src="./westward-archive/freeman-proof-1868.jpg" alt="Daniel Freeman homestead proof"></button><button type="button" class="westward-media-button" aria-label="Enlarge Daniel Freeman's final certificate"><img src="./westward-archive/freeman-final-certificate-1868.jpg" alt="Daniel Freeman final homestead certificate"></button></div><span class="westward-media-caption">HOMESTEAD ACT / 1862 · DANIEL FREEMAN RECORDS / 1863–1868</span></div><p class="westward-description">The Homestead Act opened surveyed public land to eligible applicants. Land was numbered, registered, occupied, improved, and ultimately translated into private property.</p></div></article>
+            <article class="westward-entry" data-westward-entry><div class="westward-entry-index"><strong>1869–1873</strong></div><div class="westward-entry-body"><p class="westward-stage">CONNECTED / IMAGINED</p><h2>TRANSCONTINENTAL RAILROAD + AMERICAN PROGRESS</h2><p class="westward-description">Railways, roads, and telegraph networks connected western space at unprecedented speed. “Westward” became visualized as a narrative of progress: technology entered, settlements expanded, and land was developed, while Indigenous peoples and wildlife were pushed toward the edges of the frame.</p><p class="westward-question">WHO DEFINES PROGRESS?</p></div></article>
+            <article class="westward-entry" data-westward-entry><div class="westward-entry-index"><strong>1887</strong></div><div class="westward-entry-body"><p class="westward-stage">REORGANIZED</p><h2>DAWES ACT</h2><div class="westward-document westward-document--video"><div class="video-preview" data-video-preview><button class="video-poster" type="button" aria-label="Play Indigenous perspectives on the Homestead Act"><img src="./westward-archive/indigenous-perspectives-poster.webp" alt="" loading="lazy" width="960" height="540" /><span class="video-play-icon" aria-hidden="true">▶</span></button><video hidden controls preload="none" playsinline data-src="./westward-archive/indigenous-perspectives.mp4" poster="./westward-archive/indigenous-perspectives-poster.webp" aria-label="Indigenous perspectives on the Homestead Act"></video><span class="video-status" role="status" hidden></span></div><span class="westward-media-caption">INDIGENOUS PERSPECTIVES ON THE HOMESTEAD ACT</span></div><p class="westward-description">The Dawes Act further altered Indigenous land systems by dividing portions of communally held land into individual allotments. A shift toward private ownership also changed social organization, cultural relationships, and ways of living.</p></div></article>
+          </div>
+        </section>
+        <section class="space-race-archive" aria-labelledby="space-race-title" hidden>
+          <header class="space-race-header">
+            
+            <h1 id="space-race-title"><img src="./space-race-wordmark.png" alt="SPACE RACE" /></h1>
+            <p>From a signal in orbit to classrooms, public images, television screens, and public money.</p>
+            
+          </header>
+          <div class="space-race-timeline">
+            <article class="space-race-entry" data-space-entry>
+              <div class="space-race-year"><strong>1957</strong></div>
+              <div class="space-race-body">
+                <p class="space-race-stage">RECEIVED / SIGNAL</p><h2>SPUTNIK</h2>
+                <div class="space-race-signal">
+                  <div class="space-race-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                  <button class="space-race-signal-toggle" type="button" aria-pressed="false">PLAY SIGNAL <span aria-hidden="true">&#9655;</span></button>
+                  <small>SIGNAL STUDY / RECONSTRUCTION. ORIGINAL RECORDING NOT INCLUDED IN THE PROVIDED NASA ARCHIVE.</small>
+                </div>
+                <figure class="space-race-figure"><button class="space-race-media" type="button" aria-label="Enlarge NASA Sputnik photograph"><img src="./space-race-archive/sputnik.jpg" alt="Sputnik 1, from the locally saved NASA Dawn of the Space Age page"></button><figcaption>SPUTNIK 1 / NASA</figcaption></figure>
+                <p class="space-race-copy">Most people did not see the satellite in orbit. They encountered it through radio signals, news, political discussion, and the anxiety that followed. The Space Age entered public life first as sound and information.</p>
+                
+              </div>
+            </article>
+            <article class="space-race-entry" data-space-entry>
+              <div class="space-race-year"><strong>1958</strong></div>
+              <div class="space-race-body">
+                <p class="space-race-stage">MOBILIZED / EDUCATION</p><h2>NATIONAL DEFENSE EDUCATION ACT</h2>
+                <p class="space-race-caption">PUBLIC LAW 85-864 / SEPTEMBER 2, 1958</p><p class="space-race-source-note">Original scan is not included in the provided materials.</p>
+                <p class="space-race-copy">After Sputnik, competition entered schools. Mathematics, science, engineering, foreign languages, and student loans were increasingly treated as part of national technical capacity. The race extended beyond astronauts and rockets into the classroom.</p>
+                
+              </div>
+            </article>
+            <article class="space-race-entry" data-space-entry>
+              <div class="space-race-year"><strong>1961</strong></div>
+              <div class="space-race-body">
+                <p class="space-race-stage">SYMBOLIZED / PUBLIC IMAGE</p><h2>YURI GAGARIN</h2>
+                
+                <p class="space-race-source-note">12 APRIL 1961 / VOSTOK 1 / OFFICIAL PORTRAIT AND PUBLIC-RESPONSE RECORDS NOT INCLUDED IN PROVIDED MATERIALS</p>
+                <p class="space-race-copy">Gagarin became the first human to travel into space. His flight was more than a technical event: portraits, broadcasts, newspapers, welcomes, and letters turned an individual into a national symbol and a public image of the future.</p>
+                
+              </div>
+            </article>
+            <article class="space-race-entry space-race-entry--apollo" data-space-entry>
+              <div class="space-race-year"><strong>1969</strong></div>
+              <div class="space-race-body">
+                <p class="space-race-stage">WITNESSED / CONTESTED</p><h2>APOLLO 11</h2>
+                <div class="space-race-apollo-grid">
+                  <div class="space-race-apollo-witness"><p class="space-race-column-label">A / WITNESSED</p><button class="space-race-media" type="button" aria-label="Enlarge Apollo 11 lunar photograph"><img src="./space-race-archive/apollo-11.webp" alt="Apollo 11 lunar landing image supplied for the archive"></button><p class="space-race-caption">APOLLO 11 / 1969 / USER-SUPPLIED IMAGE</p><strong class="space-race-viewers">650,000,000</strong><span class="space-race-caption">ESTIMATED VIEWERS / GLOBAL TELEVISION AUDIENCE</span><p>Millions watched one mission unfold through a shared broadcast. Who was included in the word “we”?</p></div>
+                  <div class="space-race-apollo-contest"><p class="space-race-column-label">B / CONTESTED</p><p>At the launch, public celebration and questions about poverty and federal priorities occupied the same site. Ralph Abernathy and representatives of the Poor People's Campaign met NASA Administrator Thomas Paine.</p><button class="space-race-media space-race-pdf" type="button" aria-label="Enlarge NASA 1969 chronology at the Apollo 11 public protest record"><object data-src="./space-race-archive/apollo-public-response.pdf#page=217" type="application/pdf" aria-label="NASA 1969 chronology, page 217"></object></button><p class="space-race-caption">NASA SP-4014 / ASTRONAUTICS AND AERONAUTICS, 1969 / PP. 217–218</p></div>
+                </div>
+                <p class="space-race-source-note">Budget and workforce figures are omitted pending source verification.</p>
+                <div class="space-race-record"><p class="space-race-column-label">SOCIETAL IMPACT</p><button class="space-race-media space-race-pdf" type="button" aria-label="Enlarge NASA societal impact history"><object data-src="./space-race-archive/nasa-societal-impact.pdf" type="application/pdf" aria-label="NASA Historical Studies in the Societal Impact of Spaceflight"></object></button><p class="space-race-caption">HISTORICAL STUDIES IN THE SOCIETAL IMPACT OF SPACEFLIGHT / NASA / 2007</p><p class="space-race-source-note">THE BUDGET FOR 1968 HEARINGS AND THE TWO NASA BUDGET/PUBLIC-ATTITUDE FIGURES WERE NOT PROVIDED LOCALLY. NO 1973-2004 POLLING IS PRESENTED HERE AS 1969 DATA.</p></div>
+                <p class="space-race-question">WHO PAYS FOR EXPLORATION, AND WHO BENEFITS FROM IT?</p>
+              </div>
+            </article>
+          </div>
+          
+        </section>
+        <section class="mars-archive" aria-labelledby="mars-title" hidden>
+          <header class="mars-header"><h1 id="mars-title">STARSHIP</h1><p class="mars-subtitle">MARS MIGRATION</p><p class="mars-deck">A public vision and a field of technical research. Human settlement on Mars remains a future proposal.</p></header>
+          <article class="mars-entry"><div class="mars-year">2016</div><div class="mars-body"><p class="mars-stage">VISION</p><h2>MAKING HUMANS A MULTIPLANETARY SPECIES</h2><p class="mars-copy">At the 2016 International Astronautical Congress, Elon Musk presented SpaceX’s Interplanetary Transport System concept and a vision of people living on more than one planet. The presentation records a proposed future, not an established settlement.</p>
+          <div class="mars-video" id="mars-video"><button type="button" class="mars-video-load video-poster" aria-label="Play Making Humans a Multiplanetary Species"><img src="./starship-archive/presentation-poster.webp" alt="" loading="lazy" width="960" height="540" /><span class="video-play-icon" aria-hidden="true">▶</span></button></div>
+          <p class="mars-caption">SPACEX / ELON MUSK / IAC 2016 / PUBLIC PRESENTATION</p><p class="mars-media-note">The external player loads only on request. If unavailable, <a href="https://www.youtube.com/watch?v=H7Uyfqi_TE8" target="_blank" rel="noopener noreferrer">open the original presentation</a>.</p>
+          <a class="mars-source" href="https://www.spacex.com/humanspaceflight/mars" target="_blank" rel="noopener noreferrer">SpaceX · Mars programme ↗</a><p class="mars-question">WHO DECIDES HUMANITY’S NEXT WORLD?</p></div></article>
+          <article class="mars-entry"><div class="mars-year">ISRU</div><div class="mars-body"><p class="mars-stage">TECHNICAL RESEARCH</p><h2>IN-SITU RESOURCE UTILIZATION</h2><p class="mars-copy">ISRU investigates ways to use resources at a mission’s destination. NASA studies how local materials could support life support, propellant production and exploration.</p>
+          <button class="mars-image-button" type="button" aria-label="Enlarge NASA MOXIE installation photograph"><img data-src="./starship-archive/moxie-2019.webp" alt="Engineers installing MOXIE inside the Perseverance rover in a cleanroom on Earth"></button>
+          <p class="mars-caption">NASA/JPL-CALTECH · THIS IS ONE MARS ROVER WITH MOXIE<br>PHOTOGRAPH: 20 MARCH 2019 · INSTALLATION ON EARTH</p>
+          <p class="mars-copy">MOXIE later demonstrated oxygen production from the Martian atmosphere aboard Perseverance. NASA reported the experiment’s completion in 2023. A demonstration of one process is different from an operating settlement or a full-scale resource industry.</p>
+          <p class="mars-process-label">CONCEPTUAL RELATIONSHIP · FUTURE APPLICATION</p><ol class="mars-process"><li>Mars atmosphere</li><li>Resource processing</li><li>Oxygen / materials</li><li>Future settlement</li></ol>
+          <p class="mars-media-note">The wider sequence is a concept, not a completed production system. NASA research is not presented here as a SpaceX mining operation.</p>
+          <div class="mars-sources"><a class="mars-source" href="https://www.nasa.gov/overview-in-situ-resource-utilization/" target="_blank" rel="noopener noreferrer">NASA · ISRU overview ↗</a><a class="mars-source" href="https://www.nasa.gov/reference/jsc-in-situ-resource-utilization/" target="_blank" rel="noopener noreferrer">NASA Johnson · ISRU research ↗</a><a class="mars-source" href="https://www.jpl.nasa.gov/images/pia23154-this-is-one-mars-rover-with-moxie/" target="_blank" rel="noopener noreferrer">NASA/JPL · photograph and credit ↗</a><a class="mars-source" href="https://www.jpl.nasa.gov/news/nasas-oxygen-generating-experiment-moxie-completes-mars-mission/" target="_blank" rel="noopener noreferrer">NASA/JPL · MOXIE mission report, 2023 ↗</a></div>
+          <p class="mars-question">WHEN DOES USING A WORLD BEGIN TO CHANGE IT?</p></div></article>
+          <footer class="mars-ending"><p>MARS</p><span>NOT YET A HISTORY.</span><h2>WHAT WILL WE LEAVE BEHIND?</h2></footer>
+        </section>
+        <div class="mars-lightbox" role="dialog" aria-modal="true" aria-label="NASA MOXIE photograph" hidden><button class="mars-lightbox-close" type="button" aria-label="Close NASA photograph">×</button><img alt="MOXIE installation on Earth, NASA/JPL-Caltech, 2019"></div>
+        <div class="space-race-lightbox" aria-hidden="true" role="dialog" aria-label="Expanded Space Race archive image"><button type="button" class="space-race-lightbox-close" aria-label="Close enlarged archive image">×</button><div class="space-race-lightbox-content"></div></div>
+        <div class="columbus-lightbox" aria-hidden="true" role="dialog" aria-label="Expanded archive document"><button type="button" class="columbus-lightbox-close" aria-label="Close enlarged document">×</button><div class="columbus-lightbox-content"></div></div>
+        <div class="westward-lightbox" aria-hidden="true" role="dialog" aria-label="Expanded Westward archive document"><button type="button" class="westward-lightbox-close" aria-label="Close enlarged document">×</button><div class="westward-lightbox-content"></div></div>
+      </aside>
+
+      <footer class="footer-line">
+        <div class="instruction" aria-hidden="true"><span>DRAG TO ORBIT</span><i></i><span>SCROLL TO TRAVEL</span><i class="pan-instruction"></i><span class="pan-instruction">MIDDLE DRAG TO PAN</span></div>
+        <button class="fullscreen-hint" type="button" aria-label="Toggle fullscreen">F / FULLSCREEN</button>
+      </footer>
+    </main>
+  </body>
+</html>
+
